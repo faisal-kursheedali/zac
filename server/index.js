@@ -10,7 +10,7 @@ const DB = process.env.DB_URL;
 const app = express();
 
 app.get("/", (req, res) => {
-  res("Server is working");
+  res.send("Server is working");
 });
 app.use(express.json());
 app.use(postRouter);
