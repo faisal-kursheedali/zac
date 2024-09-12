@@ -3,7 +3,7 @@ const Post = require("../model/post");
 const User = require("../model/user");
 const postRouter = express.Router();
 
-/// Getters
+/// Getters .
 postRouter.get("/api/getAllPosts", async (req, res) => {
   try {
     const data = await Post.find();
