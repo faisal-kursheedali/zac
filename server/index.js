@@ -21,6 +21,6 @@ mongoose
   .then(() => console.log("mongoose connected"))
   .catch((e) => console.log(e));
 
-app.listen(PORT, "0.0.0.0", () => {
+app.listen(PORT, () => {
   console.log(`connected at port ${PORT}`);
 });
