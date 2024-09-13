@@ -7,7 +7,10 @@ const postRouter = express.Router();
 postRouter.get("/api/getAllPosts", async (req, res) => {
   try {
     const data = await Post.find();
-    res.send(data);
+    res.status(200).json({
+      msg: "Scucess",
+      data: data,
+    });
   } catch (e) {
     res.status(500).json(e);
   }
@@ -48,7 +51,8 @@ postRouter.post("/api/createPost", async (req, res) => {
     }
     let newPost = new Post({
       ...data,
-      author: userId,
+      author: user._id,
+      authorName: user.name,
       likes: [],
     });
     newPost = await newPost.save();

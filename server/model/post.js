@@ -14,6 +14,10 @@ const postModel = new mg.Schema({
     type: String,
     required: true,
   },
+  authorName: {
+    type: String,
+    required: true,
+  },
   likes: [
     {
       // type: mg.Schema.Types.ObjectId,
