@@ -53,8 +53,8 @@ postRouter.post("/api/createPost", async (req, res) => {
     });
     newPost = await newPost.save();
     res.status(200).json({
-      msg: "post Created",
-      id: newPost._id,
+      msg: "scucess",
+      data: newPost,
     });
   } catch (e) {
     res.status(500).json(e);
