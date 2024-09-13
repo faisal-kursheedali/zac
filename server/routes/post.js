@@ -16,7 +16,10 @@ postRouter.get("/api/getAuthorPosts", async (req, res) => {
   try {
     const { authorId } = req;
     const authorPost = await Post.find({ authorId });
-    res.send(authorPost);
+    res.status(200).json({
+      msg: "scucess",
+      data: authorPost,
+    });
   } catch (e) {
     res.status(500).json(e);
   }
@@ -25,7 +28,10 @@ postRouter.get("/api/getPopularPosts", async (req, res) => {
   try {
     const posts = await Post.find();
     const sortedPost = posts.sort((a, b) => a.likes.length);
-    res.status(200).json(sortedPost);
+    res.status(200).json({
+      msg: "scucess",
+      data: sortedPost,
+    });
   } catch (e) {
     res.status(500).json(e);
   }
