@@ -21,7 +21,7 @@ userRoute.post("/api/createUser", async (req, res) => {
     newUser = await newUser.save();
     res.status(200).json({
       msg: "user Created",
-      data: newUser,
+      data: { name: newUser.name, email: newUser.emai, id: newUser._id },
     });
   }
 });
@@ -37,7 +37,7 @@ userRoute.post("/api/loginUser", async (req, res) => {
     }
     res.status(200).json({
       msg: "User logged in",
-      data: user,
+      data: { name: user.name, email: user.email, id: user._id },
     });
   } else {
     res.status(400).json({
