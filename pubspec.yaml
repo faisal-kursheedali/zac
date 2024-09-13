@@ -39,6 +39,12 @@ dependencies:
   shared_preferences: ^2.3.2
   http: ^1.2.2
   provider: ^6.1.2
+  flutter_launcher_icons: ^0.13.1
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/zac_logo.png"
 
 dev_dependencies:
   flutter_test:
