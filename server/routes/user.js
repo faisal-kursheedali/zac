@@ -21,7 +21,7 @@ userRoute.post("/api/createUser", async (req, res) => {
     newUser = await newUser.save();
     res.status(200).json({
       msg: "user Created",
-      data: { name: newUser.name, email: newUser.emai, id: newUser._id },
+      data: { name: newUser.name, email: newUser.email, id: newUser._id },
     });
   }
 });
