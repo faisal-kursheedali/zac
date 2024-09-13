@@ -30,7 +30,7 @@ postRouter.get("/api/getAuthorPosts", async (req, res) => {
 postRouter.get("/api/getPopularPosts", async (req, res) => {
   try {
     const posts = await Post.find();
-    const sortedPost = posts.sort((a, b) => a.likes.length);
+    const sortedPost = posts.sort((a, b) => a.likes.length - b.likes.length);
     res.status(200).json({
       msg: "scucess",
       data: sortedPost,
