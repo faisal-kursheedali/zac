@@ -86,7 +86,7 @@ postRouter.post("/api/updatePost", async (req, res) => {
     const posts = await Post.find();
     res.status(200).json({
       msg: "post updated",
-      data: post,
+      data: posts,
     });
   } catch (e) {
     res.status(500).json(e);
