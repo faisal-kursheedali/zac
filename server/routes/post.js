@@ -56,9 +56,10 @@ postRouter.post("/api/createPost", async (req, res) => {
       likes: [],
     });
     newPost = await newPost.save();
+    const posts = await Post.find();
     res.status(200).json({
       msg: "scucess",
-      data: newPost,
+      data: posts,
     });
   } catch (e) {
     res.status(500).json(e);
@@ -82,9 +83,10 @@ postRouter.post("/api/updatePost", async (req, res) => {
       { ...data },
       { new: true }
     );
+    const posts = await Post.find();
     res.status(200).json({
       msg: "post updated",
-      data: editPost,
+      data: post,
     });
   } catch (e) {
     res.status(500).json(e);
@@ -102,7 +104,8 @@ postRouter.post("/api/deletePost", async (req, res) => {
     const del = await Post.deleteOne({ _id: postId });
     console.log(del);
     if (del != null && del.acknowledged) {
-      res.send("Post deleted");
+      const posts = await Post.find();
+      res.status(200).json({ message: "Post Deleted", data: posts });
     } else {
       res.status(400).json({ msg: "Issue in deleting" });
     }
@@ -130,7 +133,8 @@ postRouter.post("/api/likePost", async (req, res) => {
     console.log(post.likes.length);
 
     if (post.likes.includes(user._id)) {
-      res.status(200).json({ msg: "You already liked the post" });
+      const posts = await Post.find();
+      res.status(200).json({ msg: "You already liked the post", data: posts });
       return;
     }
 
@@ -140,10 +144,10 @@ postRouter.post("/api/likePost", async (req, res) => {
       { new: true }
     );
     console.log(editPost);
-
+    const posts = await Post.find();
     res.status(200).json({
       msg: "post updated",
-      data: editPost,
+      data: posts,
     });
   } catch (e) {
     console.log(e);

@@ -46,4 +46,20 @@ userRoute.post("/api/loginUser", async (req, res) => {
   }
 });
 
+userRoute.post("/api/getUserData", async (req, res) => {
+  const { userId } = req.body;
+
+  const user = await User.findOne({ _id: userId });
+  if (user) {
+    res.status(200).json({
+      msg: "User logged in",
+      data: { name: user.name, email: user.email, id: user._id },
+    });
+  } else {
+    res.status(400).json({
+      msg: "User don't exist",
+    });
+  }
+});
+
 module.exports = userRoute;
