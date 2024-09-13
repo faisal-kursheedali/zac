@@ -26,7 +26,7 @@ class UserProvider extends ChangeNotifier {
     }
   }
 
-  void loginUser(BuildContext context,
+  Future<bool> loginUser(BuildContext context,
       {required String email, required String password}) async {
     try {
       isLoading = true;
@@ -37,15 +37,17 @@ class UserProvider extends ChangeNotifier {
       isLoading = false;
       SP.setUserIdToSP(userDate!.data.id);
       notifyListeners();
+      return true;
     } catch (e) {
       error = e.toString();
       isLoading = false;
       _showSnackBar(context, error!);
       notifyListeners();
+      return false;
     }
   }
 
-  void signupUser(BuildContext context,
+  Future<bool> signupUser(BuildContext context,
       {required String name,
       required String email,
       required String password}) async {
@@ -57,11 +59,13 @@ class UserProvider extends ChangeNotifier {
       userDate = res;
       isLoading = false;
       notifyListeners();
+      return true;
     } catch (e) {
       error = e.toString();
       isLoading = false;
       _showSnackBar(context, error!);
       notifyListeners();
+      return false;
     }
   }
 

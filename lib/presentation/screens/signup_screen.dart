@@ -18,11 +18,11 @@ class _SignupScreenState extends State<SignupScreen> {
   TextEditingController passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    if (Provider.of<UserProvider>(context, listen: true).userDate != null) {
-      // Navigator.pushReplacement(context,
-      //     MaterialPageRoute(builder: (context) => const PostListScreen()));
-      Navigator.pop(context);
-    }
+    // if (Provider.of<UserProvider>(context, listen: true).userDate != null) {
+    //   // Navigator.pushReplacement(context,
+    //   //     MaterialPageRoute(builder: (context) => const PostListScreen()));
+    //   Navigator.pop(context);
+    // }
     return Stack(
       children: [
         Scaffold(
@@ -81,17 +81,21 @@ class _SignupScreenState extends State<SignupScreen> {
                     height: 40,
                   ),
                   ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       if (emailController.text.isNotEmpty &&
                           passwordController.text.isNotEmpty &&
                           nameController.text.isNotEmpty &&
                           emailController.text.contains("@") &&
                           emailController.text.contains(".")) {
-                        Provider.of<UserProvider>(context, listen: false)
+                        final val = await Provider.of<UserProvider>(context,
+                                listen: false)
                             .signupUser(context,
                                 name: nameController.text,
                                 email: emailController.text,
                                 password: passwordController.text);
+                        if (val) {
+                          Navigator.pop(context);
+                        }
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(

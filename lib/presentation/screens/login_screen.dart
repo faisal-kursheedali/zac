@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:provider/provider.dart';
+import 'package:zac/presentation/screens/home_screen.dart';
 import 'package:zac/presentation/screens/signup_screen.dart';
 import 'package:zac/provider/post_provider.dart';
 import 'package:zac/provider/user_provider.dart';
@@ -17,11 +18,13 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    if (Provider.of<UserProvider>(context, listen: true).userDate != null) {
-      // Navigator.pushReplacement(context,
-      //     MaterialPageRoute(builder: (context) => const PostListScreen()));
-      Navigator.pop(context);
-    }
+    // if (Provider.of<UserProvider>(context, listen: true).userDate != null) {
+    //   // Navigator.pushReplacement(context,
+    //   //     MaterialPageRoute(builder: (context) => const PostListScreen()));
+    //   // Navigator.pop(context);
+    //   Navigator.pushReplacement(
+    //       context, MaterialPageRoute(builder: (context) => HomeScreen()));
+    // }
     return Stack(
       children: [
         Scaffold(
@@ -70,15 +73,21 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 40,
                   ),
                   ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       if (emailController.text.isNotEmpty &&
                           passwordController.text.isNotEmpty &&
                           emailController.text.contains("@") &&
                           emailController.text.contains(".")) {
-                        Provider.of<UserProvider>(context, listen: false)
+                        final val = await Provider.of<UserProvider>(context,
+                                listen: false)
                             .loginUser(context,
                                 email: emailController.text,
                                 password: passwordController.text);
+                        if (val) {
+                          if (context.mounted) {
+                            Navigator.pop(context);
+                          }
+                        }
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
